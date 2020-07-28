@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
 const items = require('./routes/api/items');
+require('dotenv').config();
 
 const app = express();
 
@@ -11,7 +11,7 @@ app.use(cors());
 
 // DB Config
 
-const db = require('./config/keys').mongoURI;
+const db = process.env.DB_URI;
 
 // Connect to Mongo
 mongoose
