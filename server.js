@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const items = require('./routes/api/items');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -21,6 +22,19 @@ mongoose
 
 // Use routes
 app.use('/api/items', items);
+
+// Serve Static Assets if in Production
+
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
+// Ports
 
 const port = process.env.PORT || 5000;
 
