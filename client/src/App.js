@@ -15,7 +15,7 @@ class App extends Component {
   componentDidMount() {
     let items; // fill with fetched data
     axios
-      .get('http://localhost:5000/api/items')
+      .get('/api/items')
       .then((res) => {
         this.setState({
           items: res.data,
@@ -34,7 +34,7 @@ class App extends Component {
 
   addItemBackend = (newItem) => {
     axios
-      .post('http://localhost:5000/api/items', newItem)
+      .post('/api/items', newItem)
       .then((res) => {
         console.log(res.data);
         this.addItem(res.data);
@@ -50,7 +50,7 @@ class App extends Component {
 
   deleteItemBackend = (id) => {
     axios
-      .delete(`http://localhost:5000/api/items/${id}`)
+      .delete(`/api/items/${id}`)
       .then((res) => console.log('Deleted'))
       .catch((err) => console.log(err));
     this.deleteItem(id);
